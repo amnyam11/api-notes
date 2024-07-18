@@ -2,7 +2,7 @@
 
 # Ignore Python virtual environment
 .venv
-backend/__pycache__
+__pycache__
 
 # Ignore Django secret key and other sensitive information
 #backend/settings.py
