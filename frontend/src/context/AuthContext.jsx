@@ -9,7 +9,8 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
-
+  let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null);
+  
   const navigate = useNavigate();
 
   const axiosInstance = axios.create({
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 200) {
         console.log('User logged in successfully');
         setAuthTokens(data);
-        //setUser(jwtDecode(data.access));
+        setUser(jwtDecode(data.access));
         localStorage.setItem('authTokens', JSON.stringify(data));
         console.log("Relocating...")
         navigate('/');
@@ -60,11 +61,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  let logoutUser = () => {
+    setAuthTokens(null);
+    localStorage.removeItem('authTokens');
+    navigate('/login');
+  };
+
 
   let contextData = {
+    user : user, 
     authTokens:authTokens,
     loginUser: loginUser,
     registerUser: registerUser,
+    logoutUser : logoutUser,
   };
 
 

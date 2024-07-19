@@ -1,10 +1,8 @@
 import React from 'react'
-
+import NoteList from '../notes/NoteList'
 const HomePage = () => {
   return (
-    <div>
-      HomePage
-    </div>
+    <NoteList/>
   )
 }
 
