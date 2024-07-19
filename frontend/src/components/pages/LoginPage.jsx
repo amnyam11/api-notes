@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Подключение Bootstrap
 import '../../styles/Auth.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const { loginUser, logoutUser } = useContext(AuthContext);
-
+    const navigate = useNavigate();
     useEffect(() => {
         logoutUser();
     }, []);
@@ -20,7 +21,10 @@ const LoginPage = () => {
             <form onSubmit={handleSubmit} className="auth-form">
                 <input type="text" name="username" placeholder="Username" className="form-control" />
                 <input type="password" name="password" placeholder="Password" className="form-control" />
-                <button type="submit" className="btn btn-primary">Log in</button> 
+                <div className="d-flex justify-content-between">
+                    <button type="submit" className="btn btn-primary">Sign in</button> 
+                    <button onClick={() => navigate('/register')} className="btn btn-outline-primary">Sign up</button> 
+                </div>
             </form>
         </div>
     )

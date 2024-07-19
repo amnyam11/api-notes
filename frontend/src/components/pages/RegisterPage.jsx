@@ -23,7 +23,10 @@ const RegisterPage = () => {
                 <input type="text" name="username" placeholder="Username" className="form-control" />
                 <input type="email" name="email" placeholder="Email" className="form-control" />
                 <input type="password" name="password" placeholder="Password" className="form-control" />
-                <button type="submit" className="btn btn-primary">Sign up</button> 
+                <div className="d-flex justify-content-between">
+                    <button type="submit" className="btn btn-primary">Sign up</button> 
+                    <button onClick={() => navigate('/login')} className="btn btn-outline-primary">Sign in</button> 
+                </div>
             </form>
         </div>
     )

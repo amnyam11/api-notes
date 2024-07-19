@@ -11,7 +11,7 @@ const NoteList = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
     const [isNewNote, setIsNewNote] = useState(false);
-
+    const { logoutUser } = useContext(AuthContext);
     const user = useContext(AuthContext);
 
     useEffect(() => {
@@ -64,9 +64,10 @@ const NoteList = () => {
     return (
         <div className="container mt-5">
             <h1 className="auth-form-title">Hello, {user.user.username}</h1>
-            <button onClick={() => openModal()} className="btn btn-primary mb-3">
+            <button onClick={() => openModal()} className="btn btn-primary mb-3 me-2">
                 Add New Note
             </button>
+            <button onClick={() => logoutUser()} className="btn btn-outline-dark mb-3">Logout</button>
             <div className="row">
                 {notes.map(note => (
                     <div className="col-md-3 mb-4" key={note.id}>

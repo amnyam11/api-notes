@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../components/config/axiosConfig';
 
 const AuthContext = createContext();
 
@@ -13,26 +13,6 @@ export const AuthProvider = ({ children }) => {
     let [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    const axiosInstance = axios.create({
-        baseURL: 'http://127.0.0.1:8000/api/',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    
-    
-    axiosInstance.interceptors.request.use(
-        (config) => {
-            const authTokens = JSON.parse(localStorage.getItem('authTokens'));
-            if (authTokens) {
-                config.headers.Authorization = `Bearer ${authTokens.access}`;
-            }
-            return config;
-        },
-        (error) => {
-            return Promise.reject(error);
-        }
-    );
     let loginUser = async (e) => {
         try {
             let response = await axiosInstance.post('token/', {

@@ -22,7 +22,7 @@ const NoteItem = ({ note, toggleNote, deleteNote, openModal }) => {
                 <div className={`icon-check ${showIconSuccess ? 'show' : ''}`}>✓</div>
                 <h5 className="card-title">{note.title}</h5>
                 <p className="card-text">{note.content}</p>
-                <div class="btn-group" role="group">
+                <div className="btn-group" role="group">
                     <button
                         onClick={(e) => {
                             e.stopPropagation();
