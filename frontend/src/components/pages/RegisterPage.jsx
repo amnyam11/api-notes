@@ -1,10 +1,15 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Подключение Bootstrap
+import '../../styles/Auth.css';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
     const { registerUser, logoutUser } = useContext(AuthContext);
+    const navigate = useNavigate();
     useEffect(() => {
         logoutUser();
+        navigate('/register');
     }, []);
     
     const handleSubmit = (e) => {
@@ -12,13 +17,16 @@ const RegisterPage = () => {
         registerUser(e);
     };
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" name="username" placeholder="Username" />
-            <input type="email" name="email" placeholder="Email"/>
-            <input type="password" name="password" placeholder="Password" />
-            <button type="submit">Sign up</button> 
-        </form>
+        <div className="auth-form-container">
+            <h2 className="auth-form-title">Register</h2>
+            <form onSubmit={handleSubmit} className="auth-form">
+                <input type="text" name="username" placeholder="Username" className="form-control" />
+                <input type="email" name="email" placeholder="Email" className="form-control" />
+                <input type="password" name="password" placeholder="Password" className="form-control" />
+                <button type="submit" className="btn btn-primary">Sign up</button> 
+            </form>
+        </div>
     )
 }
 
-export default RegisterPage
+export default RegisterPage;

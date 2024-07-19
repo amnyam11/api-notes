@@ -3,6 +3,8 @@ import axiosInstance from '../config/axiosConfig';
 import NoteItem from './NoteItem';
 import NoteModal from './NoteModal';
 import AuthContext from '../../context/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../../styles/NoteList.css';
 
 const NoteList = () => {
     const [notes, setNotes] = useState([]);
@@ -60,14 +62,14 @@ const NoteList = () => {
     };
 
     return (
-        <div>
-            <h1>Hello, {user.user.username}</h1>
-            <button onClick={() => openModal()}>
+        <div className="container mt-5">
+            <h1 className="auth-form-title">Hello, {user.user.username}</h1>
+            <button onClick={() => openModal()} className="btn btn-primary mb-3">
                 Add New Note
             </button>
-            <div>
+            <div className="row">
                 {notes.map(note => (
-                    <div key={note.id}>
+                    <div className="col-md-3 mb-4" key={note.id}>
                         <NoteItem
                             note={note}
                             toggleNote={toggleNote}

@@ -1,0 +1,12 @@
+.icon-check {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 30px;
+    color: green;
+    display: none;
+}
+
+.icon-check.show {
+    display: block;
+}

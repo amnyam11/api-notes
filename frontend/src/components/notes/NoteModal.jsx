@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const NoteModal = ({ show, onHide, note, isNewNote, addNote, updateNote }) => {
     const [editedNote, setEditedNote] = useState({ ...note });
@@ -22,38 +23,44 @@ const NoteModal = ({ show, onHide, note, isNewNote, addNote, updateNote }) => {
     };
 
     return (
-        <div style={{ display: show ? 'block' : 'none' }}>
-            <div>
-                <h5>{editedNote.title || 'New Note'}</h5>
-                <button onClick={onHide}>Close</button>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Title:</label>
-                        <input
+        <Modal show={show} onHide={onHide} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>{editedNote.title || 'New Note'}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form onSubmit={handleSubmit} id="editNoteForm">
+                    <Form.Group controlId="formTitle">
+                        <Form.Label>Title:</Form.Label>
+                        <Form.Control
                             type="text"
                             name="title"
                             value={editedNote.title}
                             onChange={handleInputChange}
                             required
                         />
-                    </div>
-                    <div>
-                        <label>Content:</label>
-                        <textarea
+                    </Form.Group>
+                    <Form.Group controlId="formContent">
+                        <Form.Label>Content:</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
                             name="content"
                             value={editedNote.content}
                             onChange={handleInputChange}
                             required
                         />
-                    </div>
-                    <button type="submit">
-                        {isNewNote ? 'Create Note' : 'Save Changes'}
-                    </button>
-                </form>
-            </div>
-        </div>
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={onHide}>
+                    Close
+                </Button>
+                <Button variant="primary" type="submit" form="editNoteForm">
+                    {isNewNote ? 'Create Note' : 'Save Changes'}
+                </Button>
+            </Modal.Footer>
+        </Modal>
     );
 };
 
